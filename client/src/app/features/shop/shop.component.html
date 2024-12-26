@@ -1,14 +1,14 @@
-<div class="flex flex-col gap-2">
+@if (products) {
+<div class="flex flex-col gap-4">
   <div class="flex justify-between items-center gap-3">
-    <mat-paginator class="!bg-white" [length]="products?.count" [pageSize]="shopParams.pageSize"
+    <mat-paginator class="!bg-white" [length]="products.count" [pageSize]="shopParams.pageSize"
       [pageIndex]="shopParams.pageNumber-1" [showFirstLastButtons]="true" aria-label="Select page"
       [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"> </mat-paginator>
     <form class="relative flex items-center w-full max-w-md mx-4" #searchForm="ngForm" (ngSubmit)="onSearchChange()">
-      <input type="search" placeholder="Search" class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg "
+      <input type="search" placeholder="Search"
+        class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg "
         [(ngModel)]="shopParams.search" name="search" />
-      <button mat-icon-button type="submit"
-        class="absolute inset-y-0 right-6 top-1 flex items-center  text-gray-600"
-      >
+      <button mat-icon-button type="submit" class="absolute inset-y-0 right-6 top-1 flex items-center  text-gray-600">
         <mat-icon>search</mat-icon>
       </button>
     </form>
@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="grid grid-cols-5 gap-4">
-    @for (product of products?.data; track product.id){
+    @for (product of products.data; track product.id){
     <app-product-item [product]="product"></app-product-item>
     }
   </div>
@@ -39,3 +39,4 @@
     }
   </mat-selection-list>
 </mat-menu>
+}
